@@ -85,6 +85,20 @@ class HandleComponents extends Mechanism
 
     public function update($snapshot, $updates, $calls)
     {
+
+        // Validate snapshot structure
+        if (! is_array($snapshot)) {
+            abort(400, 'Snapshot must be a valid array');
+        }
+
+        if (! isset($snapshot['data'])) {
+            abort(400, 'Snapshot is missing required "data" key');
+        }
+
+        if (! isset($snapshot['memo'])) {
+            abort(400, 'Snapshot is missing required "memo" key');
+        }
+
         $data = $snapshot['data'];
         $memo = $snapshot['memo'];
 
@@ -454,6 +468,20 @@ class HandleComponents extends Mechanism
 
     protected function callMethods($root, $calls, $context)
     {
+
+        // Validate calls parameter
+        if (! is_array($calls)) {
+            abort(400, 'Calls parameter must be a valid array');
+        }
+
+        if (! isset($call['method'])) {
+            abort(400, "Call at index {$idx} is missing required 'method' key");
+        }
+
+        if (! isset($call['params'])) {
+            abort(400, "Call at index {$idx} is missing required 'params' key");
+        }
+
         $returns = [];
 
         foreach ($calls as $idx => $call) {
