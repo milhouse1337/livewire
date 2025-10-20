@@ -474,14 +474,6 @@ class HandleComponents extends Mechanism
             abort(400, 'Calls parameter must be a valid array');
         }
 
-        if (! isset($call['method'])) {
-            abort(400, "Call at index {$idx} is missing required 'method' key");
-        }
-
-        if (! isset($call['params'])) {
-            abort(400, "Call at index {$idx} is missing required 'params' key");
-        }
-
         $returns = [];
 
         foreach ($calls as $idx => $call) {
